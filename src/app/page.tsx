@@ -32,7 +32,11 @@ export default function Home() {
     const question = data.question
     setLoading(true)
 
-    console.log('my question is', question)
+    toast({
+      title: "You submitted the question!",
+    })
+
+    console.log('my question is', question) 
 
     const result = await groqApi(question)
 
@@ -40,16 +44,7 @@ export default function Home() {
     if (!answer) {
       setAnswer(`Sorry, I couldn't understand your question 😔`)
     }
-    setAnswer(answer!)
-
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    setAnswer(answer!) 
 
 
     setLoading(false)
@@ -59,7 +54,7 @@ export default function Home() {
   return (
     <div className="container mx-auto"> 
       <div className="py-3">
-        <h1 className="text-4xl">Ask Gitz AI - Powered by <a href="https://groq.com/" target="_blank">Groq</a></h1>
+        <h1 className="text-4xl">Ask Gitz (AI) - Powered by <a href="https://groq.com/" target="_blank">Groq</a></h1>
       </div>
       <div className="py-3"> 
         <Form {...form}>
@@ -90,11 +85,13 @@ export default function Home() {
       </div>
 
       <div className="py-3">
-        {
-          (loading === true)
-            ? 'Sebentar, aku sedang mikir ...'
-            : answer
-        }
+        <div className="antialiased">
+          {
+            (loading === true)
+              ? 'Sebentar, aku sedang mikir ...'
+              : answer
+          }
+        </div> 
       </div>
     </div> 
   );
