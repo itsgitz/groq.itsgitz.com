@@ -13,28 +13,20 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { groqApi } from '@/lib/groq';
+import {QuestionForm, QuestionFormSchema} from '@/lib/types/forms';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-
-const FormSchema = z.object({
-  question: z.string().min(3, {
-    message: 'Question must be at least 3 characters.',
-  }),
-});
-
-type Form = z.infer<typeof FormSchema>;
 
 export default function Home() {
   const { toast } = useToast();
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
-  const form = useForm<Form>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<QuestionForm>({
+    resolver: zodResolver(QuestionFormSchema),
   });
 
-  async function onSubmit(data: Form) {
+  async function onSubmit(data: QuestionForm) {
     const question = data.question;
     setLoading(true);
 
