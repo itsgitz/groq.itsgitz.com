@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <div className='container mx-auto'>
       <div className='py-3'>
-        <h1 className='text-4xl'>
+        <h1 className='text-4xl font-bold'>
           Ask Gitz (AI) - Powered by{' '}
           <a href='https://groq.com/' target='_blank'>
             Groq
@@ -91,9 +91,9 @@ export default function Home() {
       </div>
 
       <div className='py-3'>
-        <div className='antialiased'>
+        <p className='antialiased font-light'>
           {loading === true ? 'Sebentar, aku sedang mikir ...' : answer}
-        </div>
+        </p>
       </div>
     </div>
   );
